@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'Bootstrap/css/bootstrap.css' %}">
+    <meta charset="UTF-8">
+    <title>Vinne Machine</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link mr-5" href="{% url 'MainVinne:main'%}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item mx-5">
+            <a class="nav-link" href="{% url 'MainVinne:results'%}">Elektron Skeemer</a>
+        </li>
+        <li class="nav-item mx-5">
+            <a class="nav-link" href="#">Harjutamine</a>
+        </li>
+    </ul>
+</nav>
+<div class="container mt-4">
+    <h1 class = "mb-4"> {{ nimi }}  </h1>
+    <div class="row mb-2">
+
+        <div class="col-sm">
+            Aatominumber
+        </div>
+        <div class="col-sm">
+            <p> {{ number }}</p>
+        </div>
+        <div class="col-sm">
+            Sümbol
+        </div>
+        <div class="col-sm">
+            <p> {{ symbol }}</p>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-sm">
+            Nimi
+        </div>
+        <div class="col-sm">
+            <p> {{ name }}</p>
+        </div>
+        <div class="col-sm">
+            Rühmanumber
+        </div>
+        <div class="col-sm">
+            <p> {{ group }}</p>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-sm">
+            Periood
+        </div>
+        <div class="col-sm">
+            <p> {{ period }}</p>
+        </div>
+        <div class="col-sm">
+            Prootonite arv
+        </div>
+        <div class="col-sm">
+            <p> {{ protons }}</p>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-sm">
+            Elemendi tüüp
+        </div>
+        <div class="col-sm">
+            {% if block %}
+                <p> {{ block }}</p>
+            {% else %}
+                ---
+            {% endif %}
+        </div>
+        <div class="col-sm">
+            Elektronide arv
+        </div>
+        <div class="col-sm">
+            <p> {{ electrons }}</p>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-sm">
+            Aatommass
+        </div>
+        <div class="col-sm">
+            <p> {{ mass }}</p>
+        </div>
+        <div class="col-sm">
+            Elektronegatiivsus
+        </div>
+        <div class="col-sm">
+            {% if covrad != 0.0 %}
+                <p>{{ covrad }}</p>
+            {% else %}
+                ---
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-sm">
+            Keemistemperatuur
+        </div>
+        <div class="col-sm">
+            {% if tboil != 0.0 %}
+                <p>{{ tboil }}</p>
+            {% else %}
+                ---
+            {% endif %}
+
+        </div>
+        <div class="col-sm">
+            Sulamistemperatuur
+        </div>
+        <div class="col-sm">
+            {% if tmelt != 0.0 %}
+                <p>{{ tmelt }}</p>
+            {% else %}
+                ---
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm">
+            Tihedus
+        </div>
+        <div class="col-sm">
+            {% if density != 0.0 %}
+                <p>{{ density }}</p>
+            {% else %}
+                ---
+            {% endif %}
+
+        </div>
+        <div class="col-sm">
+            Oksüdatsiooniastmed
+        </div>
+        <div class="col-sm">
+            {% if oxistates != "*" %}
+                <p>{{ oxistates }}</p>
+            {% else %}
+                ---
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+</body>
