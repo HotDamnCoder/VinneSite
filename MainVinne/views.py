@@ -67,7 +67,8 @@ class search(View):
         try:
             results = Elements.objects.filter(number=int(query))
         except ValueError:
-            results = Elements.objects.filter(name__icontains=query) | Elements.objects.filter(est_name__icontains=query) | Elements.objects.filter(symbol__iexact=query)
+            results = Elements.objects.filter(symbol__iexact=query) |\
+                    Elements.objects.filter(name__icontains=query) | Elements.objects.filter(est_name__icontains=query)
         return render(request, "MainVinne/VinneHTML/search.html", {"results":results})
 
 
