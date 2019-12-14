@@ -8,7 +8,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto ml-2">
         <li class="nav-item active">
             <a class="nav-link mr-5" href="{% url 'MainVinne:main'%}">Home <span class="sr-only">(current)</span></a>
         </li>
@@ -16,7 +16,7 @@
             <a class="nav-link" href="{% url 'MainVinne:results'%}">Elektron Skeemer</a>
         </li>
         <li class="nav-item mx-5">
-            <a class="nav-link" href="#">Harjutamine</a>
+            <a class="nav-link" href="{% url 'MainVinne:harjutama'%}">Harjutamine</a>
         </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action = "{% url 'MainVinne:search' %}" method = "post" >
@@ -24,6 +24,9 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name = "query">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+    <a class="navbar-brand ml-4">
+        <img src="{% static 'MainVinne/VinneImages/download.jpg'%}" width="30" height="35" alt="">
+    </a>
 </nav>
 <div class="container mt-4">
     <h1 class = "mb-4"> {{ name }}  </h1>
