@@ -26,13 +26,13 @@ class Results(View):
         except ValueError:
             ele = request.POST["Element"]
             try:
-                electrons = Elements.objects.get(est_name__icontains=ele)
+                electrons = Elements.objects.get(est_name__iexact=ele)
             except (ObjectDoesNotExist, MultipleObjectsReturned):
                 try:
-                    electrons = Elements.objects.get(name__icontains=ele).electrons
+                    electrons = Elements.objects.get(name__iexact=ele).electrons
                 except ObjectDoesNotExist:
                     try:
-                        electrons = Elements.objects.get(symbol__icontains=ele).electrons
+                        electrons = Elements.objects.get(symbol__iexact=ele).electrons
                     except ObjectDoesNotExist:
                         error = True
                         return render(request, "MainVinne/VinneHTML/Result.html", {"error": error})
@@ -56,7 +56,7 @@ class Results(View):
 class Element(View):
     def get(self, request, element):
         try:
-            element = Elements.objects.get(name=element)
+            element = Elements.objects.get(name__iexact=element)
         except ObjectDoesNotExist:
             raise Http404
         return render(request, "MainVinne/VinneHTML/Element.html", vars(element))
@@ -67,7 +67,7 @@ class search(View):
         try:
             results = Elements.objects.filter(number=int(query))
         except ValueError:
-            results = Elements.objects.filter(name__contains=query) | Elements.objects.filter(est_name__contains=query) | Elements.objects.filter(symbol=query)
+            results = Elements.objects.filter(name__icontains=query) | Elements.objects.filter(est_name__icontains=query) | Elements.objects.filter(symbol__iexact=query)
         return render(request, "MainVinne/VinneHTML/search.html", {"results":results})
 
 
@@ -80,17 +80,15 @@ class harjutama(View):
         orbitals = inskeem.split(" ")
         print(inelement)
         try:
-            electrons = Elements.objects.get(name=inelement).electrons
+            electrons = Elements.objects.get(name__iexact=inelement).electrons
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             try:
-                electrons = Elements.objects.get(est_name=inelement).electrons
+                electrons = Elements.objects.get(est_name__iexact=inelement).electrons
             except (ObjectDoesNotExist, MultipleObjectsReturned):
                 try:
-                    electrons = Elements.objects.get(symbol=inelement).electrons
+                    electrons = Elements.objects.get(symbol__iexact=inelement).electrons
                 except (ObjectDoesNotExist, MultipleObjectsReturned):
                     return render(request, "MainVinne/VinneHTML/harjutamine.html", {"error" : True})
-
-
         orbital_amount = generate_orbital_needs(electrons)
         orbital_names = generate_orbital_layer_names(0, orbital_amount)
         table = generate_table(orbital_names[:])
