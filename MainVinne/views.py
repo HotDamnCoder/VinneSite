@@ -1,10 +1,12 @@
-from .Generate_Table import *
-from django.shortcuts import render, redirect
-from django.views.generic import View
-from .models import Element as Elements
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from django.shortcuts import render
+from django.views.generic import View
+
+from .Generate_Table import *
+from .models import Element as Elements
+
 
 class MainSite(View):
     def get(self, request):
@@ -131,7 +133,8 @@ class harjutama(View):
         if "..." in wrong:
             html += "<em class='text-danger'>" + " ..." * wrong.count("...") + "</em>"
         html += "</p>"
-        return render(request, "MainVinne/VinneHTML/harjutamine.html", {})
+        return render(request, "MainVinne/VinneHTML/harjutamine.html",
+                      {"html": html, "element": inelement, "skeem": inskeem})
 
     def get(self, request):
         return render(request, "MainVinne/VinneHTML/harjutamine.html", {})
