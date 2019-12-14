@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'Bootstrap/css/bootstrap.css' %}">
+    <meta charset="UTF-8">
+    <title>Vinne Machine</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link mr-5" href="{% url 'MainVinne:main'%}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="{% url 'MainVinne:results'%}">Elektron Skeemer</a>
+            </li>
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="#">Harjutamine</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0"action = "{% url 'MainVinne:search' %}" method = "post">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="Element search" aria-label="Search" name = "query">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+    <div class="container mt-4">
+        <h5 class="mb-4">Search results:</h5>
+        {% for result in results %}
+            <div class="card mt-4">
+                <div class="card-body ">
+                    <a href="{% url 'MainVinne:element' element=result.name  %}" class="card-text"> {{result.name }} </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
