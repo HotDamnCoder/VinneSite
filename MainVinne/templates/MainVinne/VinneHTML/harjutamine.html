@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'Bootstrap/css/bootstrap.css' %}">
+    <meta charset="UTF-8">
+    <title>Vinne Machine</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active ml-2">
+                <a class="nav-link mr-5" href="{% url 'MainVinne:main'%}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="{% url 'MainVinne:results'%}">Elektron Skeemer</a>
+            </li>
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="#">Harjutamine</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action = "{% url 'MainVinne:search' %}" method = "post" >
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name = "query">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <a class="navbar-brand ml-4">
+            <img src="{% static 'MainVinne/VinneImages/download.jpg'%}" width="30" height="35" alt="">
+        </a>
+    </nav>
+    <div class="container mt-4">
+        <form action = "{% url 'MainVinne:harjutama' %}" method = "post">
+            {% csrf_token %}
+            <h5>Element</h5>
+            <div class="form-group mt-4">
+                <textarea name = "inelement" type="text" class="form-control " rows="1">{{ element }}</textarea>
+            </div>
+            <h5>Elektronskeem</h5>
+            <div class="form-group mt-4">
+                <textarea name = "inskeem" type="text" class="form-control " rows="3" >{{ skeem }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-4" >Submit</button>
+            {% if error %}
+                <div class="alert alert-danger mt-4" role="alert">
+                    Elementi pole!
+                </div>
+            {% endif %}
+            <div class="form-group mt-4 mb-4">
+            </div>
+            <h5 class = "mt-4">Parandatud elektronskeem</h5>
+            <div class="card mt-4">
+                <div class="card-body" >
+                    {{ html | safe }}
+                </div>
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>
