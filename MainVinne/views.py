@@ -26,13 +26,13 @@ class Results(View):
         except ValueError:
             ele = request.POST["Element"]
             try:
-                Elements.objects.get(est_name=ele)
+                electrons = Elements.objects.get(est_name__icontains=ele)
             except (ObjectDoesNotExist, MultipleObjectsReturned):
                 try:
-                    electrons = Elements.objects.get(name=ele).electrons
+                    electrons = Elements.objects.get(name__icontains=ele).electrons
                 except ObjectDoesNotExist:
                     try:
-                        electrons = Elements.objects.get(symbol=ele).electrons
+                        electrons = Elements.objects.get(symbol__icontains=ele).electrons
                     except ObjectDoesNotExist:
                         error = True
                         return render(request, "MainVinne/VinneHTML/Result.html", {"error": error})
