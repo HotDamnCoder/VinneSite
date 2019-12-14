@@ -19,9 +19,14 @@
             <a class="nav-link" href="#">Harjutamine</a>
         </li>
     </ul>
+    <form class="form-inline my-2 my-lg-0" action = "{% url 'MainVinne:search' %}" method = "post" >
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name = "query">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
 </nav>
 <div class="container mt-4">
-    <h1 class = "mb-4"> {{ nimi }}  </h1>
+    <h1 class = "mb-4"> {{ name }}  </h1>
     <div class="row mb-2">
 
         <div class="col-sm">
@@ -39,10 +44,10 @@
     </div>
     <div class="row mb-2">
         <div class="col-sm">
-            Nimi
+            Aatomiraadius
         </div>
         <div class="col-sm">
-            <p> {{ name }}</p>
+            <p> {{ atmrad }}</p>
         </div>
         <div class="col-sm">
             Rühmanumber
@@ -94,8 +99,8 @@
             Elektronegatiivsus
         </div>
         <div class="col-sm">
-            {% if covrad != 0.0 %}
-                <p>{{ covrad }}</p>
+            {% if eleneg != 0.0 %}
+                <p>{{ eleneg }}</p>
             {% else %}
                 ---
             {% endif %}

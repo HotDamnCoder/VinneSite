@@ -19,6 +19,12 @@
             <a class="nav-link" href="#">Harjutamine</a>
         </li>
     </ul>
+    <form class="form-inline my-2 my-lg-0" action = "{% url 'MainVinne:search' %}" method = "post" >
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name = "query">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
 </nav>
 <div class="container mt-4">
     <form action="{% url 'MainVinne:results' %}" method="post">
@@ -26,6 +32,15 @@
         <div class="form-group mb-4">
             <label for="exampleFormControlInput1">Elektronide arv</label>
             <input name = "Elektron" type="number" class="form-control" id="exampleFormControlInput1" value = "{{ elektronid }}">
+            <small id="passwordHelpBlock" class="form-text text-muted">
+                Sisesta arv, mis on jääb 0 ja 1000000000 vahele.
+            </small>
+            {% if error %}
+                <div class="alert alert-danger mt-4" role="alert">
+                    Sisesta norm arv tra!
+                </div>
+
+            {% endif %}
             <input value="Lao lagedale" type="submit" class="btn btn-primary  mt-4">
         </div>
     </form>
@@ -33,7 +48,7 @@
     <div class="card mt-4">
         <div class="card-body ">
             {% if element and element != "Doesn't exist" %}
-                <a href="{% url 'MainVinne:element' element=element electrons=elektronid %}" class="card-text"> {{ element }} </a>
+                <a href="{% url 'MainVinne:element' element=element  %}" class="card-text"> {{ element }} </a>
              {% elif element and element == "Doesn't exist"%}
                 <p class="card-text"> {{ element }} </p>
             {% endif %}
