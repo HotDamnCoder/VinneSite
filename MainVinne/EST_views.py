@@ -8,11 +8,11 @@ from MainVinne.Functions.generate import generate
 from MainVinne.Functions.corrected_skeem import correct_skeem
 from .models import Element as Elements
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import login_required
 
 
 class Home(View):
     @staticmethod
+    @login_required
     def get(request):
         return render(request, "MainVinne/VinneHTML/EST_html/home_EST.html", {})
 
@@ -74,6 +74,7 @@ class search(View):
 
 class harjutama(View):
     @staticmethod
+    @login_required
     def post(request):
         inskeem = request.POST["inskeem"]
         inelement = request.POST["inelement"]
@@ -93,5 +94,6 @@ class harjutama(View):
                       {"html": html, "element": inelement, "skeem": inskeem})
 
     @staticmethod
+    @login_required
     def get(request):
         return render(request, "MainVinne/VinneHTML/EST_html/harjutamine_EST.html", {})
