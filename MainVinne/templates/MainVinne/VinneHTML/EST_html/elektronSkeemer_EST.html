@@ -5,7 +5,7 @@
     <body>
         {% include "MainVinne/VinneHTML/EST_html/navbar_EST.html" %}
         <div class="container mt-4">
-            <form action="{% url 'MainVinne:est_search' %}" method="post">
+            <form action="{% url 'MainVinne:est_skeemer' %}" method="post">
                 {% csrf_token %}
                 <div class="form-group mb-4">
                     <label for="exampleFormControlInput1">Elektronide arv</label>

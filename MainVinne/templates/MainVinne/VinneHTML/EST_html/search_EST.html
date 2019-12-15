@@ -9,7 +9,7 @@
             {% for result in results %}
                 <div class="card mt-4">
                     <div class="card-body">
-                        <a href="{% url 'MainVinne:est_element' element=result.name  %}" class="card-text">{{result.est_name}} </a>
+                        <a href="{% url 'MainVinne:est_element' element=result.est_name  %}" class="card-text">{{result.est_name}} </a>
                     </div>
                 </div>
             {% endfor %}
