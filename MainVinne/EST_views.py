@@ -74,9 +74,10 @@ class search(View):
         return render(request, "MainVinne/VinneHTML/EST_html/search_EST.html", {"results": results})
 
 
-class harjutama(View):
+class harjutama(LoginRequiredMixin, View):
+    login_url = '/admin/'
+    redirect_field_name = '/harjutamine/'
     @staticmethod
-    @login_required
     def post(request):
         inskeem = request.POST["inskeem"]
         inelement = request.POST["inelement"]
