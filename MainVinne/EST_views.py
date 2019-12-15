@@ -7,8 +7,11 @@ from MainVinne.Functions.skeemer_context import skeemer_context
 from MainVinne.Functions.generate import generate
 from MainVinne.Functions.corrected_skeem import correct_skeem
 from .models import Element as Elements
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 class Home(View):
     @staticmethod
     def get(request):
@@ -70,6 +73,7 @@ class search(View):
         return render(request, "MainVinne/VinneHTML/EST_html/search_EST.html", {"results": results})
 
 
+@login_required
 class harjutama(View):
     @staticmethod
     def post(request):
