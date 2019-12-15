@@ -12,8 +12,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class Home(LoginRequiredMixin, View):
-    login_url = '/login/'
-    redirect_field_name = 'redirect_to'
+    login_url = '/admin/'
+    redirect_field_name = '/ee/'
     @staticmethod
     def get(request):
         return render(request, "MainVinne/VinneHTML/EST_html/home_EST.html", {})
