@@ -73,7 +73,6 @@ class search(View):
         return render(request, "MainVinne/VinneHTML/EST_html/search_EST.html", {"results": results})
 
 
-@login_required
 class harjutama(View):
     @staticmethod
     def post(request):
