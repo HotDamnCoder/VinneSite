@@ -9,8 +9,9 @@ from .models import Element as Elements
 
 
 class MainSite(View):
+
     def get(self, request):
-        return render(request, "MainVinne/VinneHTML/Vinne.html", {})
+        return render(request, "MainVinne/VinneHTML/home_EST.html", {})
 
 
 class Results(View):
@@ -60,6 +61,7 @@ class Element(View):
         except ObjectDoesNotExist:
             raise Http404
         return render(request, "MainVinne/VinneHTML/Element.html", vars(element))
+
 
 class search(View):
     def post(self, request):
