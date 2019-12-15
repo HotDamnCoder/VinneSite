@@ -8,13 +8,12 @@ from .Generate_Table import *
 from .models import Element as Elements
 
 
-class MainSite(View):
-
+class Home(View):
     def get(self, request):
         return render(request, "MainVinne/VinneHTML/EST_html/home_EST.html", {})
 
 
-class Results(View):
+class Skeemer(View):
     def get(self, request):
         return render(request, "MainVinne/VinneHTML/EST_html/elektronSkeemer_EST.html", {})
 
@@ -30,13 +29,10 @@ class Results(View):
                 electrons = Elements.objects.get(est_name__iexact=ele)
             except (ObjectDoesNotExist, MultipleObjectsReturned):
                 try:
-                    electrons = Elements.objects.get(name__iexact=ele).electrons
+                    electrons = Elements.objects.get(symbol__iexact=ele).electrons
                 except ObjectDoesNotExist:
-                    try:
-                        electrons = Elements.objects.get(symbol__iexact=ele).electrons
-                    except ObjectDoesNotExist:
-                        error = True
-                        return render(request, "MainVinne/VinneHTML/EST_html/elektronSkeemer_EST.html", {"error": error})
+                    error = True
+                    return render(request, "MainVinne/VinneHTML/EST_html/elektronSkeemer_EST.html", {"error": error})
         orbital_amount = generate_orbital_needs(electrons)
         orbital_names = generate_orbital_layer_names(0, orbital_amount)
         table = generate_table(orbital_names[:])
@@ -45,7 +41,7 @@ class Results(View):
         try:
             element = Elements.objects.get(number=electrons).est_name
         except (ObjectDoesNotExist, MultipleObjectsReturned):
-            element = "Doesn't exist"
+            element = "Ei eksisteeri"
         Last_electrons, Nr_of_shells, element_kind, square_scheme = read_electron_scheme(electron_sch, orb_values)
         text = ""
         for scheme in square_scheme:
@@ -57,7 +53,7 @@ class Results(View):
 class Element(View):
     def get(self, request, element):
         try:
-            element = Elements.objects.get(name__iexact=element)
+            element = Elements.objects.get(est_name__iexact=element)
         except ObjectDoesNotExist:
             raise Http404
         return render(request, "MainVinne/VinneHTML/EST_html/element_EST.html", vars(element))
@@ -69,8 +65,7 @@ class search(View):
         try:
             results = Elements.objects.filter(number=int(query))
         except ValueError:
-            results = Elements.objects.filter(symbol__iexact=query) |\
-                    Elements.objects.filter(name__icontains=query) | Elements.objects.filter(est_name__icontains=query)
+            results = Elements.objects.filter(symbol__iexact=query) | Elements.objects.filter(est_name__icontains=query)
         return render(request, "MainVinne/VinneHTML/EST_html/search_EST.html", {"results":results})
 
 
@@ -83,15 +78,12 @@ class harjutama(View):
         orbitals = inskeem.split(" ")
         print(inelement)
         try:
-            electrons = Elements.objects.get(name__iexact=inelement).electrons
+            electrons = Elements.objects.get(est_name__iexact=inelement).electrons
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             try:
-                electrons = Elements.objects.get(est_name__iexact=inelement).electrons
+                electrons = Elements.objects.get(symbol__iexact=inelement).electrons
             except (ObjectDoesNotExist, MultipleObjectsReturned):
-                try:
-                    electrons = Elements.objects.get(symbol__iexact=inelement).electrons
-                except (ObjectDoesNotExist, MultipleObjectsReturned):
-                    return render(request, "MainVinne/VinneHTML/EST_html/harjutamine_EST.html", {"error" : True})
+                return render(request, "MainVinne/VinneHTML/EST_html/harjutamine_EST.html", {"error" : True})
         orbital_amount = generate_orbital_needs(electrons)
         orbital_names = generate_orbital_layer_names(0, orbital_amount)
         table = generate_table(orbital_names[:])
@@ -125,7 +117,6 @@ class harjutama(View):
                 except IndexError:
                     wrong.append(y)
                 count += 1
-
         for orb in orbitals:
             if orb in wrong:
                 html += "<em class='text-danger'> "+orb+"</em>"
