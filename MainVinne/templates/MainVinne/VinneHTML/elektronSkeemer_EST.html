@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ee">
+    {% include "MainVinne/VinneHTML/head.html" %}
+    <body>
+        {% include "MainVinne/VinneHTML/navbar_EST.html" %}
+        <div class="container mt-4">
+            <form action="{% url 'MainVinne:results' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group mb-4">
+                    <label for="exampleFormControlInput1">Elektronide arv</label>
+                    <input name = "Elektron" type="number" class="form-control" id="exampleFormControlInput1" value = "{{ elektronid }}">
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                        Sisesta arv, mis on jääb 0 ja 1000000000 vahele.
+                    </small>
+                    {% if error %}
+                        <div class="alert alert-danger mt-4" role="alert">
+                            Sisesta norm arv tra!
+                        </div>
+                    {% endif %}
+                    <label class = "mt-4">Element</label>
+                    <input name = "Element" type="text" class="form-control" id="exampleFormControlInput1" value = "{{ element }}">
+                    {% if error %}
+                        <div class="alert alert-danger mt-4" role="alert">
+                            Sisesta norm element!
+                        </div>
+                    {% endif %}
+                    <input value="Lao lagedale" type="submit" class="btn btn-primary  mt-4 mb-4">
+                </div>
+            </form>
+            <h5>Element</h5>
+                <div class="card mt-4">
+                    <div class="card-body ">
+                        {% if element and element != "Doesn't exist" %}
+                            <a href="{% url 'MainVinne:element' element=element  %}" class="card-text">{{ element }}</a>
+                         {% elif element and element == "Doesn't exist"%}
+                            <p class="card-text">{{ element }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            <h5 class = "mt-4">Elektronkihtide arv</h5>
+            <div class="card mt-4">
+                <div class="card-body ">
+                    {% if kihid %}
+                        <p class = "card-text">{{ kihid }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <h5 class = "mt-4">Elemendi tüüp</h5>
+            <div class="card mt-4">
+                <div class="card-body ">
+                    {% if tüüp %}
+                        <p class = "card-text">{{ tüüp }}</p>
+
+                    {% endif %}
+
+                </div>
+            </div>
+            <h5 class = "mt-4">Elektron skeem</h5>
+            <div class="card mt-4">
+                <div class="card-body ">
+                    {% if eskeem %}
+                        <p class = "card-text">{{ eskeem }}</p>
+                    {% endif %}
+
+                </div>
+            </div>
+            <h5 class = "mt-4"> Ruutskeem </h5>
+            <div class="card mt-4 mb-4">
+                <div class="card-body">
+                    {% if rskeem %}
+                        <p  class = "card-text overflow-auto" style = "white-space: pre;">{{ rskeem }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
