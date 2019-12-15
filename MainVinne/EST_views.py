@@ -45,7 +45,7 @@ class Skeemer(View):
         context = skeemer_context(electron_sch, orb_values)
         context["error"] = error
         context["elektronid"] = electrons
-        context["element"] = [element]
+        context["element"] = element
         return render(request, "MainVinne/VinneHTML/EST_html/elektronSkeemer_EST.html", context)
 
 
@@ -67,7 +67,7 @@ class search(View):
             results = Elements.objects.filter(number=int(query))
         except ValueError:
             results = Elements.objects.filter(symbol__iexact=query) | Elements.objects.filter(est_name__icontains=query)
-        return render(request, "MainVinne/VinneHTML/EST_html/search_EST.html", {"results":results})
+        return render(request, "MainVinne/VinneHTML/EST_html/search_EST.html", {"results": results})
 
 
 class harjutama(View):
@@ -85,7 +85,7 @@ class harjutama(View):
             try:
                 electrons = Elements.objects.get(symbol__iexact=inelement).electrons
             except (ObjectDoesNotExist, MultipleObjectsReturned):
-                return render(request, "MainVinne/VinneHTML/EST_html/harjutamine_EST.html", {"error" : True})
+                return render(request, "MainVinne/VinneHTML/EST_html/harjutamine_EST.html", {"error": True})
         html = correct_skeem(electrons, orbitals)
         return render(request, "MainVinne/VinneHTML/EST_html/harjutamine_EST.html",
                       {"html": html, "element": inelement, "skeem": inskeem})
@@ -93,9 +93,3 @@ class harjutama(View):
     @staticmethod
     def get(request):
         return render(request, "MainVinne/VinneHTML/EST_html/harjutamine_EST.html", {})
-
-
-
-
-
-
