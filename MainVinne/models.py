@@ -1,5 +1,5 @@
 from django.db import models
-from .elements import Element as ele
+from MainVinne.Functions.elements import Element as ele
 
 
 class Element(models.Model):
