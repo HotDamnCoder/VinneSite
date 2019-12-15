@@ -2,6 +2,7 @@ import math
 import re
 import codecs
 
+
 def generate_orbital_layer_names(starting_point, amount, characters=None, row=None):
     if row is None:
         row = []
@@ -183,7 +184,7 @@ def add_arrow(square: str, arrow_type: int):
         return square.replace(" ", "↓", 1)
 
 
-def create_square_scheme(orbitals: list, highest_shell: int, orbital_values:dict):
+def create_square_scheme(orbitals: list, highest_shell: int, orbital_values: dict):
     highest_s_orbital = [orbital for orbital in orbitals if highest_shell in orbital[:-1] and "s" in orbital[:-1]]
     highest_s_orbital_index = orbitals.index(highest_s_orbital[0])
     last_orbitals = {}
@@ -239,4 +240,3 @@ def create_square_scheme(orbitals: list, highest_shell: int, orbital_values:dict
         square_print_values.append(square_print_value)
         count += 1
     return square_print_values
-

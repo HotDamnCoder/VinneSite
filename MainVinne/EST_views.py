@@ -42,7 +42,7 @@ class Skeemer(View):
         except (ObjectDoesNotExist, MultipleObjectsReturned):
             element = "Ei eksisteeri"
         electron_sch, orb_values = generate(electrons)
-        context = skeemer_context(electron_sch, electron_sch)
+        context = skeemer_context(electron_sch, orb_values)
         context["error"] = error
         context["elektronid"] = electrons
         context["element"] = [element]
