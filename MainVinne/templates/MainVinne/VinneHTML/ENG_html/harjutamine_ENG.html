@@ -5,7 +5,7 @@
     <body>
         {% include "MainVinne/VinneHTML/ENG_html/navbar_ENG.html" %}
         <div class="container mt-4">
-            <form action = "{% url 'ENG_MainVinne:harjutama' %}" method = "post">
+            <form action = "{% url 'ENG_MainVinne:eng_harjutama' %}" method = "post">
                 {% csrf_token %}
                 <h5>Element</h5>
                 <div class="form-group mt-4">

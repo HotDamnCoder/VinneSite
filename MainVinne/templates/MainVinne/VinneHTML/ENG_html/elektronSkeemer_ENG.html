@@ -32,7 +32,7 @@
                 <div class="card mt-4">
                     <div class="card-body ">
                         {% if element and element != "Doesn't exist" %}
-                            <a href="{% url 'ENG_MainVinne:element' element=element  %}" class="card-text">{{ element }}</a>
+                            <a href="{% url 'ENG_MainVinne:eng_element' element=element  %}" class="card-text">{{ element }}</a>
                          {% elif element and element == "Doesn't exist"%}
                             <p class="card-text">{{ element }}</p>
                         {% endif %}

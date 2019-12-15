@@ -39,9 +39,9 @@ class Skeemer(View):
         orb_values = generate_orbital_values(orbital_names)
         electron_sch = create_electron_scheme(table, electrons, orb_values)
         try:
-            element = Elements.objects.get(number=electrons).est_name
+            element = Elements.objects.get(number=electrons).name
         except (ObjectDoesNotExist, MultipleObjectsReturned):
-            element = "Ei eksisteeri"
+            element = "Doesn't exist"
         Last_electrons, Nr_of_shells, element_kind, square_scheme = read_electron_scheme(electron_sch, orb_values)
         text = ""
         for scheme in square_scheme:
