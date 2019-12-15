@@ -5,7 +5,7 @@
     <body>
         {% include "MainVinne/VinneHTML/EST_html/navbar_EST.html" %}
         <div class="container mt-4">
-            <form action="{% url 'MainVinne:est_skeemer' %}" method="post">
+            <form action="{% url 'EST_MainVinne:est_skeemer' %}" method="post">
                 {% csrf_token %}
                 <div class="form-group mb-4">
                     <label for="exampleFormControlInput1">Elektronide arv</label>
@@ -32,7 +32,7 @@
                 <div class="card mt-4">
                     <div class="card-body ">
                         {% if element and element != "Doesn't exist" %}
-                            <a href="{% url 'MainVinne:est_element' element=element  %}" class="card-text">{{ element }}</a>
+                            <a href="{% url 'EST_MainVinne:est_element' element=element  %}" class="card-text">{{ element }}</a>
                          {% elif element and element == "Doesn't exist"%}
                             <p class="card-text">{{ element }}</p>
                         {% endif %}

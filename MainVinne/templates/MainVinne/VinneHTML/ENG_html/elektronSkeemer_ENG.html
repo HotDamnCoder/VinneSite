@@ -5,7 +5,7 @@
     <body>
         {% include "MainVinne/VinneHTML/ENG_html/navbar_ENG.html" %}
         <div class="container mt-4">
-            <form action="{% url 'MainVinne:results' %}" method="post">
+            <form action="{% url 'ENG_MainVinne:results' %}" method="post">
                 {% csrf_token %}
                 <div class="form-group mb-4">
                     <label for="exampleFormControlInput1">Number of elements</label>
@@ -32,7 +32,7 @@
                 <div class="card mt-4">
                     <div class="card-body ">
                         {% if element and element != "Doesn't exist" %}
-                            <a href="{% url 'MainVinne:element' element=element  %}" class="card-text">{{ element }}</a>
+                            <a href="{% url 'ENG_MainVinne:element' element=element  %}" class="card-text">{{ element }}</a>
                          {% elif element and element == "Doesn't exist"%}
                             <p class="card-text">{{ element }}</p>
                         {% endif %}
