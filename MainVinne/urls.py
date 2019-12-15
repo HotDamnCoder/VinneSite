@@ -1,7 +1,7 @@
 from django.urls import path
-
-from . import views
+from django.views.generic.base import RedirectView
+from . import EST_views
 app_name = "Global_MainVinne"
 urlpatterns = [
-    path('', views.redirect.as_view(), name="redirect")
+    path('', EST_views.Home.as_view())
 ]
