@@ -11,12 +11,12 @@ from .models import Element as Elements
 class MainSite(View):
 
     def get(self, request):
-        return render(request, "MainVinne/VinneHTML/home_EST.html", {})
+        return render(request, "MainVinne/VinneHTML/EST_html/home_EST.html", {})
 
 
 class Results(View):
     def get(self, request):
-        return render(request, "MainVinne/VinneHTML/elektronSkeemer_EST.html", {})
+        return render(request, "MainVinne/VinneHTML/EST_html/elektronSkeemer_EST.html", {})
 
     def post(self, request):
         error = False
@@ -36,7 +36,7 @@ class Results(View):
                         electrons = Elements.objects.get(symbol__iexact=ele).electrons
                     except ObjectDoesNotExist:
                         error = True
-                        return render(request, "MainVinne/VinneHTML/elektronSkeemer_EST.html", {"error": error})
+                        return render(request, "MainVinne/VinneHTML/EST_html/elektronSkeemer_EST.html", {"error": error})
         orbital_amount = generate_orbital_needs(electrons)
         orbital_names = generate_orbital_layer_names(0, orbital_amount)
         table = generate_table(orbital_names[:])
@@ -51,7 +51,7 @@ class Results(View):
         for scheme in square_scheme:
             text += scheme+"\n"
         context = {"error": error, "elektronid": electrons, "element": element, "kihid": Nr_of_shells, "tüüp": element_kind, "eskeem": electron_sch, "rskeem": text}
-        return render(request, "MainVinne/VinneHTML/elektronSkeemer_EST.html", context)
+        return render(request, "MainVinne/VinneHTML/EST_html/elektronSkeemer_EST.html", context)
 
 
 class Element(View):
@@ -60,7 +60,7 @@ class Element(View):
             element = Elements.objects.get(name__iexact=element)
         except ObjectDoesNotExist:
             raise Http404
-        return render(request, "MainVinne/VinneHTML/element_EST.html", vars(element))
+        return render(request, "MainVinne/VinneHTML/EST_html/element_EST.html", vars(element))
 
 
 class search(View):
@@ -71,7 +71,7 @@ class search(View):
         except ValueError:
             results = Elements.objects.filter(symbol__iexact=query) |\
                     Elements.objects.filter(name__icontains=query) | Elements.objects.filter(est_name__icontains=query)
-        return render(request, "MainVinne/VinneHTML/search_EST.html", {"results":results})
+        return render(request, "MainVinne/VinneHTML/EST_html/search_EST.html", {"results":results})
 
 
 class harjutama(View):
@@ -91,7 +91,7 @@ class harjutama(View):
                 try:
                     electrons = Elements.objects.get(symbol__iexact=inelement).electrons
                 except (ObjectDoesNotExist, MultipleObjectsReturned):
-                    return render(request, "MainVinne/VinneHTML/harjutamine_EST.html", {"error" : True})
+                    return render(request, "MainVinne/VinneHTML/EST_html/harjutamine_EST.html", {"error" : True})
         orbital_amount = generate_orbital_needs(electrons)
         orbital_names = generate_orbital_layer_names(0, orbital_amount)
         table = generate_table(orbital_names[:])
@@ -134,11 +134,11 @@ class harjutama(View):
         if "..." in wrong:
             html += "<em class='text-danger'>" + " ..." * wrong.count("...") + "</em>"
         html += "</p>"
-        return render(request, "MainVinne/VinneHTML/harjutamine_EST.html",
+        return render(request, "MainVinne/VinneHTML/EST_html/harjutamine_EST.html",
                       {"html": html, "element": inelement, "skeem": inskeem})
 
     def get(self, request):
-        return render(request, "MainVinne/VinneHTML/harjutamine_EST.html", {})
+        return render(request, "MainVinne/VinneHTML/EST_html/harjutamine_EST.html", {})
 
 
 

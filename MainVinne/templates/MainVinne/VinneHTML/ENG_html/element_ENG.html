@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ee">
+    {% include "MainVinne/VinneHTML/head.html" %}
+    <body>
+        {% include "MainVinne/VinneHTML/EST_html/navbar_EST.html" %}
+        <div class="container mt-4">
+            <h1 class = "mb-4">{{ est_name }}</h1>
+            <div class="row mb-2">
+                <div class="col-sm">
+                    Atomic number
+                </div>
+                <div class="col-sm">
+                    <p>{{ number }}</p>
+                </div>
+                <div class="col-sm">
+                    Chemical symbol
+                </div>
+                <div class="col-sm">
+                    <p>{{ symbol }}</p>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm">
+                    Atomic radius
+                </div>
+                <div class="col-sm">
+                    <p>{{ atmrad }}</p>
+                </div>
+                <div class="col-sm">
+                    Group
+                </div>
+                <div class="col-sm">
+                    <p>{{ group }}</p>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm">
+                    Period
+                </div>
+                <div class="col-sm">
+                    <p>{{ period }}</p>
+                </div>
+                <div class="col-sm">
+                    Number of protons
+                </div>
+                <div class="col-sm">
+                    <p>{{ protons }}</p>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm">
+                    Block
+                </div>
+                <div class="col-sm">
+                    {% if block %}
+                        <p>{{ block }}</p>
+                    {% else %}
+                        ---
+                    {% endif %}
+                </div>
+                <div class="col-sm">
+                    Number of electrons
+                </div>
+                <div class="col-sm">
+                    <p>{{ electrons }}</p>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm">
+                    Atomic mass
+                </div>
+                <div class="col-sm">
+                    <p>{{ mass }}</p>
+                </div>
+                <div class="col-sm">
+                    Electronegativity
+                </div>
+                <div class="col-sm">
+                    {% if eleneg != 0.0 %}
+                        <p>{{ eleneg }}</p>
+                    {% else %}
+                        ---
+                    {% endif %}
+
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-sm">
+                    Boiling temperature
+                </div>
+                <div class="col-sm">
+                    {% if tboil != 0.0 %}
+                        <p>{{ tboil }}</p>
+                    {% else %}
+                        ---
+                    {% endif %}
+
+                </div>
+                <div class="col-sm">
+                    Melting temperature
+                </div>
+                <div class="col-sm">
+                    {% if tmelt != 0.0 %}
+                        <p>{{ tmelt }}</p>
+                    {% else %}
+                        ---
+                    {% endif %}
+
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm">
+                    Density
+                </div>
+                <div class="col-sm">
+                    {% if density != 0.0 %}
+                        <p>{{ density }}</p>
+                    {% else %}
+                        ---
+                    {% endif %}
+
+                </div>
+                <div class="col-sm">
+                    Oxidation states
+                </div>
+                <div class="col-sm">
+                    {% if oxistates != "*" %}
+                        <p>{{ oxistates }}</p>
+                    {% else %}
+                        ---
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

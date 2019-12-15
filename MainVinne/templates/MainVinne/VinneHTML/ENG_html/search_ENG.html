@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ee">
+    {% include "MainVinne/VinneHTML/head.html" %}
+    <body>
+       {% include "MainVinne/VinneHTML/EST_html/navbar_EST.html" %}
+        <div class="container mt-4">
+            <h5 class="mb-4">Search results:</h5>
+            {% for result in results %}
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <a href="{% url 'MainVinne:element' element=result.name  %}" class="card-text">{{result.name}} </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>

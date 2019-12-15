@@ -3,7 +3,7 @@
 <html lang="ee">
     {% include "MainVinne/VinneHTML/head.html" %}
     <body>
-        {% include "MainVinne/VinneHTML/navbar_EST.html" %}
+        {% include "MainVinne/VinneHTML/EST_html/navbar_EST.html" %}
         <div class="container mt-4">
             <form action = "{% url 'MainVinne:harjutama' %}" method = "post">
                 {% csrf_token %}
@@ -15,7 +15,7 @@
                 <div class="form-group mt-4">
                     <textarea name = "inskeem" type="text" class="form-control " rows="3" >{{ skeem }}</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary mt-4" >Submit</button>
+                <button type="submit" class="btn btn-primary mt-4" >Esita</button>
                 {% if error %}
                     <div class="alert alert-danger mt-4" role="alert">
                         Elementi pole!
