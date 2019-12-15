@@ -8,11 +8,13 @@ from MainVinne.Functions.generate import generate
 from MainVinne.Functions.corrected_skeem import correct_skeem
 from .models import Element as Elements
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class Home(View):
+class Home(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
     @staticmethod
-    @login_required
     def get(request):
         return render(request, "MainVinne/VinneHTML/EST_html/home_EST.html", {})
 
