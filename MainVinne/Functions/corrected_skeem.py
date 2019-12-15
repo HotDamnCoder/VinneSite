@@ -2,7 +2,7 @@ from MainVinne.Functions.generate import generate
 
 
 def correct_skeem(electrons, orbitals):
-    orb_values, electron_sch = generate(electrons)
+    electron_sch, orb_values = generate(electrons)
     electron_sch = electron_sch.split(" ")
     wrong = []
     right = []
