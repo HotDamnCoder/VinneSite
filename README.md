@@ -1,5 +1,5 @@
 # VinneSite
-Website made with python and django for finding info about different elements and their structure
+Website made with python and django for finding info about different elements and their structure.
 
 Screenshot:
 
